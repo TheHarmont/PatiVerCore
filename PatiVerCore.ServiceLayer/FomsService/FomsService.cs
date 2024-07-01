@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace PatiVerCore.ServiceLayer.FomsService
 {
@@ -18,6 +19,12 @@ namespace PatiVerCore.ServiceLayer.FomsService
         public FomsService()
         {
             Foms = new MiacBDZServiceIdentClient();
+
+            //Настраиваем таймауты
+            var binding = Foms.Endpoint.Binding;
+            binding.OpenTimeout = TimeSpan.FromSeconds(5);
+            binding.SendTimeout = TimeSpan.FromSeconds(5);
+            binding.ReceiveTimeout = TimeSpan.FromSeconds(5);
         }
 
         public PersonResponse GetPersonInfo_FIO(PersonRequestFIO req)
