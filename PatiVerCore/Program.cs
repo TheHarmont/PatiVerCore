@@ -61,13 +61,7 @@ try
     app.UseServiceModel(serviceBuilder =>
     {
         serviceBuilder.AddService<WcfService>();
-        serviceBuilder.AddServiceEndpoint<WcfService, IWcfService>(new CoreWCF.BasicHttpBinding(CoreWCF.Channels.BasicHttpSecurityMode.None)
-        {
-            OpenTimeout = TimeSpan.FromSeconds(5),
-            CloseTimeout = TimeSpan.FromSeconds(5),
-            SendTimeout = TimeSpan.FromSeconds(5),
-            ReceiveTimeout = TimeSpan.FromSeconds(5)
-        }, "/PatiVerWcf.svc");
+        serviceBuilder.AddServiceEndpoint<WcfService, IWcfService>(new CoreWCF.BasicHttpBinding(CoreWCF.Channels.BasicHttpSecurityMode.None), "/PatiVerWcf.svc");
         var serviceMetadataBehavior = app.Services.GetRequiredService<ServiceMetadataBehavior>();
         serviceMetadataBehavior.HttpGetEnabled = true;
         serviceMetadataBehavior.HttpsGetEnabled = true;
